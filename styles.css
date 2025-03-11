@@ -341,51 +341,121 @@ b, strong {
     padding-left: 0;
 }
 
-/* Базовые стили для мобильных устройств */
-@media screen and (max-width: 768px) {
+/* Стили для вертикальной ориентации на мобильных */
+@media screen and (max-width: 768px) and (orientation: portrait) {
     .container {
-        padding: 10px;
-        transform: none; /* Убираем сдвиг на мобильных */
+        padding: 5px;
+        transform: none !important; /* Отключаем сдвиг */
+        width: 100%;
+        max-width: 100%;
     }
 
+    /* Начальное состояние */
+    .container:not(.has-result) {
+        padding: 10px;
+    }
+
+    .container:not(.has-result) .search-card {
+        padding: 15px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Состояние с результатом */
     .container.has-result {
-        flex-direction: column; /* Меню сверху, контент снизу */
+        flex-direction: column;
         gap: 10px;
+        padding: 5px;
     }
 
     .container.has-result .search-card {
-        position: static; /* Убираем sticky позиционирование */
-        flex: none;
         width: 100%;
-        max-width: none;
-        margin-bottom: 10px;
+        max-width: 100%;
+        padding: 10px;
+        margin: 0;
+        box-sizing: border-box;
     }
 
     .result-container {
-        padding: 15px;
-        font-size: 14px; /* Уменьшаем шрифт */
-    }
-
-    /* Уменьшаем отступы в сценариях */
-    .check-section {
+        width: 100%;
         padding: 10px;
-        margin: 8px 0;
+        box-sizing: border-box;
+        font-size: 14px;
     }
 
-    /* Уменьшаем отступы в тексте сценария */
-    .check-section div {
-        padding-left: 10px !important; /* Перезаписываем инлайн стили */
+    /* Уменьшаем все отступы и размеры */
+    .check-section {
+        padding: 8px;
+        margin: 5px 0;
     }
 
-    /* Делаем заголовки компактнее */
-    h3 {
-        font-size: 16px;
-        margin: 8px 0;
+    .section-content {
+        padding: 8px;
     }
 
-    /* Уменьшаем разделители */
     .section-divider {
-        margin: 10px 0;
+        margin: 8px 0;
+    }
+
+    input, select, button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    h3 {
+        font-size: 15px;
+        margin: 5px 0;
+    }
+}
+
+/* Стили для горизонтальной ориентации на мобильных */
+@media screen and (max-width: 768px) and (orientation: landscape) {
+    body {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
+    .container {
+        padding: 10px;
+        transform: none !important; /* Отключаем все трансформации */
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        margin: 0 auto;
+    }
+
+    /* Начальное состояние (только форма) */
+    .container:not(.has-result) {
+        align-items: center;
+        justify-content: center;
+    }
+
+    .container:not(.has-result) .search-card {
+        width: 400px; /* Фиксированная ширина */
+        margin: 0 auto;
+    }
+
+    /* Состояние с результатом */
+    .container.has-result {
+        max-width: 100%;
+        gap: 10px;
+        padding: 5px;
+    }
+
+    .container.has-result .search-card {
+        flex: 0 0 300px;
+        position: static;
+        margin: 0;
+    }
+
+    .result-container {
+        flex: 1;
+        max-width: calc(100% - 320px);
+        font-size: 14px;
+        padding: 10px;
     }
 }
 
